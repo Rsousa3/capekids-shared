@@ -6,7 +6,7 @@ export const createQuestionnaireSchema = z.object({
   status: z.enum(["draft", "active", "closed", "archived"]).default("active"),
   title: z.string().min(1),
   description: z.string().min(1),
-  participantTarget: z.number.optional(),
+  participantTarget: z.number().optional(),
   allowToJoinAfterFull: z.boolean(),
   accessCode: z.string().optional(),
 });
