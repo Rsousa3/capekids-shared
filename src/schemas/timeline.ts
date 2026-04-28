@@ -2,18 +2,30 @@ import { z } from "zod";
 
 export const timelineSchema = z.object({
   id: z.string().uuid().nullable(), // Nullable in frontend
-  sourceType: z.enum(["experiment", "task", "training"]),
+  sourceType: z.enum(["experiment", "task", "training", "questionnaire"]),
   sourceId: z.string().uuid(),
 });
 export type TimelineSchemaType = z.infer<typeof timelineSchema>;
 
-export const stepEnumValues = [
+export const experimentStepEnumValues = [
   "custom_block",
   "task",
   "conditional",
   "sequential_stimuli",
   // "simultaneous_stimuli",
   "multi_trigger_stimuli",
+] as const;
+
+export const questionnaireStepEnumValues = [
+  "question_text",
+  "question_radio",
+  "question_checkbox",
+  "question_dropdown",
+] as const;
+
+export const stepEnumValues = [
+  ...experimentStepEnumValues,
+  ...questionnaireStepEnumValues,
 ] as const;
 
 export const stepTypeEnum = z.enum(stepEnumValues);
@@ -28,6 +40,8 @@ export const timelineStepMetadataSchema = z.object({
   triggers: z.array(z.any()).nullable().optional(),
   config: z.any().nullable().optional(),
   group: z.any().nullable().optional(),
+  question: z.string().nullable().optional(),
+  question_options: z.array(z.string()).nullable().optional(),
 });
 
 export type TimelineStepMetadata = z.infer<typeof timelineStepMetadataSchema>;

@@ -3,7 +3,7 @@ import { stepConnectionSchema } from "./stepConnections";
 import { timelineStepSchema } from "./timeline";
 
 export const createExperimentSchema = z.object({
-  status: z.enum(["draft", "active", "closed", "archived"]).default("draft"),
+  status: z.enum(["draft", "active", "closed", "archived"]).default("active"),
   title: z.string().min(1),
   description: z.string().min(1),
   participantTarget: z.number().optional(),
@@ -34,7 +34,7 @@ export const experimentSchemaWithTimeline = z.object({
   experiment: experimentSchema,
   timeline: z.object({
     id: z.string().uuid(),
-    sourceType: z.enum(["experiment", "task", "training"]),
+    sourceType: z.enum(["experiment", "task", "training", "questionnaire"]),
     sourceId: z.string().uuid(),
     createdAt: z.string().datetime(),
     steps: z.array(timelineStepSchema),

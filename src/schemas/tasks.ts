@@ -23,7 +23,7 @@ export const taskSchemaWithTimeline = z.object({
   task: taskSchema,
   timeline: z.object({
     id: z.string().uuid(),
-    sourceType: z.enum(["experiment", "task", "training"]),
+    sourceType: z.enum(["experiment", "task", "training", "questionnaire"]),
     sourceId: z.string().uuid(),
     createdAt: z.string().datetime(),
     steps: z.array(timelineStepSchema),
