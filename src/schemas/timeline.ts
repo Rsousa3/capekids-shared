@@ -16,16 +16,9 @@ export const experimentStepEnumValues = [
   "multi_trigger_stimuli",
 ] as const;
 
-export const questionnaireStepEnumValues = [
-  "question_text",
-  "question_radio",
-  "question_checkbox",
-  "question_dropdown",
-] as const;
-
 export const stepEnumValues = [
   ...experimentStepEnumValues,
-  ...questionnaireStepEnumValues,
+  "question",
 ] as const;
 
 export const stepTypeEnum = z.enum(stepEnumValues);
